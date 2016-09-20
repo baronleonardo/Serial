@@ -99,7 +99,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="line_ending_combobox">
+           <widget class="ComboBox_LineEnding" name="line_ending_combobox">
             <property name="currentIndex">
              <number>1</number>
             </property>
@@ -375,6 +375,11 @@
    <class>ComboBox_BaudRate</class>
    <extends>QComboBox</extends>
    <header>combobox_baudrate</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBox_LineEnding</class>
+   <extends>QComboBox</extends>
+   <header>combobox_lineending</header>
   </customwidget>
  </customwidgets>
  <resources/>
