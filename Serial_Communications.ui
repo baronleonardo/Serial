@@ -33,7 +33,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -223,7 +223,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QComboBox" name="baudrate_combobox_2">
+           <widget class="ComboBox_BaudRate" name="baudrate_combobox_2">
             <property name="currentIndex">
              <number>4</number>
             </property>
