@@ -58,7 +58,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTextEdit" name="serial_out">
+         <widget class="SerialOut_TextEdit" name="serial_out">
           <property name="undoRedoEnabled">
            <bool>false</bool>
           </property>
@@ -380,6 +380,11 @@
    <class>ComboBox_LineEnding</class>
    <extends>QComboBox</extends>
    <header>combobox_lineending</header>
+  </customwidget>
+  <customwidget>
+   <class>SerialOut_TextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>serialout_textedit</header>
   </customwidget>
  </customwidgets>
  <resources/>
