@@ -126,7 +126,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="baudrate_combobox">
+           <widget class="ComboBox_BaudRate" name="baudrate_combobox">
             <property name="currentIndex">
              <number>4</number>
             </property>
@@ -370,6 +370,11 @@
    <extends>QWidget</extends>
    <header>PyQt5.QtChart</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ComboBox_BaudRate</class>
+   <extends>QComboBox</extends>
+   <header>combobox_baudrate</header>
   </customwidget>
  </customwidgets>
  <resources/>
