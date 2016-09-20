@@ -321,6 +321,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="page_backward_btn">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -388,5 +391,70 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>page_backward_btn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>page_backward_btn</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>746</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>741</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>page_forward_btn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>page_forward_btn</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>778</x>
+     <y>257</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>781</x>
+     <y>252</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>page_backward_btn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>page_forward_btn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>745</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>779</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>page_forward_btn</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>page_backward_btn</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>788</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>748</x>
+     <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
