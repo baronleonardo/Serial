@@ -391,11 +391,18 @@
    <class>SerialOut_TextEdit</class>
    <extends>QTextEdit</extends>
    <header>serialout_textedit</header>
+   <slots>
+    <slot>on_input_sent(QString)</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>LineEdit_SerialIn</class>
    <extends>QLineEdit</extends>
    <header>lineedit_serialin</header>
+   <slots>
+    <signal>input_sent(QString)</signal>
+    <slot>on_return_pressed(QString)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -461,6 +468,38 @@
     <hint type="destinationlabel">
      <x>748</x>
      <y>264</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>serial_input</sender>
+   <signal>returnPressed()</signal>
+   <receiver>serial_input</receiver>
+   <slot>on_return_pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>194</x>
+     <y>23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>serial_input</sender>
+   <signal>input_sent(QString)</signal>
+   <receiver>serial_out</receiver>
+   <slot>on_input_sent(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>487</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>76</y>
     </hint>
    </hints>
   </connection>
