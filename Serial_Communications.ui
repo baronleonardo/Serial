@@ -402,8 +402,9 @@
    <header>lineedit_serialin</header>
    <slots>
     <signal>input_sent(QString)</signal>
-    <slot>on_return_pressed()</slot>
+    <slot>on_EnterKey_pressed()</slot>
     <slot>on_line_ending_changed(int)</slot>
+    <slot>on_Sendbtn_pressed()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -477,7 +478,7 @@
    <sender>serial_input</sender>
    <signal>returnPressed()</signal>
    <receiver>serial_input</receiver>
-   <slot>on_return_pressed()</slot>
+   <slot>on_EnterKey_pressed()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>158</x>
@@ -493,7 +494,7 @@
    <sender>send_btn</sender>
    <signal>clicked()</signal>
    <receiver>serial_input</receiver>
-   <slot>on_return_pressed()</slot>
+   <slot>on_Sendbtn_pressed()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>724</x>
@@ -534,6 +535,38 @@
     <hint type="destinationlabel">
      <x>393</x>
      <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baudrate_combobox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>baudrate_combobox_2</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>762</x>
+     <y>220</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>751</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baudrate_combobox_2</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>baudrate_combobox</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>773</x>
+     <y>180</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>751</x>
+     <y>223</y>
     </hint>
    </hints>
   </connection>

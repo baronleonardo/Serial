@@ -7,16 +7,19 @@ class LineEdit_SerialIn(QLineEdit):
 	__line_ending = "\n"
 
 	# create a signal
-	input_sent = pyqtSignal(['QString'])
+	serial_input_sent = pyqtSignal(['QString'])
 
 	def __init__(self, parent):
 		super(LineEdit_SerialIn, self).__init__(parent)
 		self.parent = parent
 		
-	def on_return_pressed(self):
+	def on_EnterKey_pressed(self):
 		text = self.text() + self.__line_ending
-		self.input_sent.emit(text)
+		self.serial_input_sent.emit(text)
 		self.clear()
+
+	def on_Sendbtn_pressed(self):
+		self.on_EnterKey_pressed()
 
 	def on_line_ending_changed(self, line_ending_index):
 		if line_ending_index == 0:
