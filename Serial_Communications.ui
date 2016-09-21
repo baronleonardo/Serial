@@ -403,6 +403,7 @@
    <slots>
     <signal>input_sent(QString)</signal>
     <slot>on_return_pressed()</slot>
+    <slot>on_line_ending_changed(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -517,6 +518,22 @@
     <hint type="destinationlabel">
      <x>61</x>
      <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>line_ending_combobox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>serial_input</receiver>
+   <slot>on_line_ending_changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>607</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>393</x>
+     <y>33</y>
     </hint>
    </hints>
   </connection>
