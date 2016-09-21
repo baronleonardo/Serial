@@ -401,7 +401,7 @@
    <header>lineedit_serialin</header>
    <slots>
     <signal>input_sent(QString)</signal>
-    <slot>on_return_pressed(QString)</slot>
+    <slot>on_return_pressed()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -500,6 +500,22 @@
     <hint type="destinationlabel">
      <x>494</x>
      <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>send_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>serial_input</receiver>
+   <slot>on_return_pressed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>724</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>618</x>
+     <y>29</y>
     </hint>
    </hints>
   </connection>
