@@ -9,3 +9,6 @@ class SerialOut_TextEdit(QTextEdit):
 
 	def on_input_sent(self, text):
 		self.append(text)
+
+	def on_autoscroll_state_changed(self, state):
+		pass

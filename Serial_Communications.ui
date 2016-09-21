@@ -393,6 +393,7 @@
    <header>serialout_textedit</header>
    <slots>
     <slot>on_input_sent(QString)</slot>
+    <slot>on_autoscroll_state_changed(int)</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -516,6 +517,22 @@
     <hint type="destinationlabel">
      <x>618</x>
      <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>autoscroll_chkbox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>serial_out</receiver>
+   <slot>on_autoscroll_state_changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>63</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>180</y>
     </hint>
    </hints>
   </connection>
