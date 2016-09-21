@@ -7,7 +7,7 @@ class SerialOut_TextEdit(QTextEdit):
 		super(SerialOut_TextEdit, self).__init__(parent)
 		self.parent = parent
 
-	def on_input_sent(self, text):
+	def on_serial_read(self, text):
 		self.append(text)
 
 	def on_autoscroll_state_changed(self, state):

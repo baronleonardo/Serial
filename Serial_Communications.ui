@@ -392,7 +392,7 @@
    <extends>QTextEdit</extends>
    <header>serialout_textedit</header>
    <slots>
-    <slot>on_input_sent(QString)</slot>
+    <slot>on_serial_read(QString)</slot>
     <slot>on_autoscroll_state_changed(int)</slot>
    </slots>
   </customwidget>
@@ -485,22 +485,6 @@
     <hint type="destinationlabel">
      <x>194</x>
      <y>23</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>serial_input</sender>
-   <signal>input_sent(QString)</signal>
-   <receiver>serial_out</receiver>
-   <slot>on_input_sent(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>487</x>
-     <y>33</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>494</x>
-     <y>76</y>
     </hint>
    </hints>
   </connection>

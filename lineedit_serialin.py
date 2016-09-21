@@ -12,6 +12,5 @@ class LineEdit_SerialIn(QLineEdit):
 		self.parent = parent
 		
 	def on_return_pressed(self):
-		if self.text() != "":
-			self.input_sent.emit(self.text())
+		self.input_sent.emit(self.text())
 		self.clear()
