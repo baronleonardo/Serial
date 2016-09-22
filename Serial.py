@@ -28,3 +28,14 @@ class Serial(QSerialPort):
             ports_info.append( (port.systemLocation(), port.manufacturer()) )
 
         return ports_info
+
+    def open( self, port_loc="/dev/ttyACM0", baud_rate=9600):
+        self.baudRate = baud_rate
+        self.setPortName(port_loc)
+
+        if super(Serial, self).open(QIODevice.ReadWrite) == True:
+            return True
+
+        else:
+            print("Can't open port %s" % port_loc)
+            return False
