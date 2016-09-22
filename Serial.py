@@ -18,7 +18,7 @@ class Serial(QSerialPort):
         line = self.readLine().trimmed()
 
         if line != "":
-            print(line)
+            return line
 
     @staticmethod
     def get_available_ports_systemLocations_and_manufacturers():
