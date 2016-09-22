@@ -1,7 +1,11 @@
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
-from PyQt5.QtCore import QIODevice
+from PyQt5.QtCore import QIODevice, pyqtSignal
 
 class Serial(QSerialPort):
+
+    # Signal
+    readyRead = pyqtSignal(['QByteArray'])
+
     def __init__(self, parent=None):
         super(Serial, self).__init__(parent)
         self.parent      = parent
@@ -11,14 +15,14 @@ class Serial(QSerialPort):
         self.stopBits    = self.OneStop
         self.flowControl = self.NoFlowControl
 
-        # signal: ready to read, slot: begin reading
-        self.readyRead.connect(self.read_data)
+        # signal: ready to read, slot: format data
+        super(Serial, self).readyRead.connect(self.format_data)
 
-    def read_data(self):
+    def format_data(self):
         line = self.readLine().trimmed()
 
         if line != "":
-            return line
+            self.readyRead['QByteArray'].emit(line)
 
     @staticmethod
     def get_available_ports_systemLocations_and_manufacturers():
