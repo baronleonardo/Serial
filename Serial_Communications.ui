@@ -299,13 +299,25 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0,0,0">
       <property name="spacing">
        <number>0</number>
       </property>
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
+      <item>
+       <widget class="ComboBox_Ports" name="ports_combobox"/>
+      </item>
       <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
@@ -406,6 +418,11 @@
     <slot>on_line_ending_changed(int)</slot>
     <slot>on_Sendbtn_pressed()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>ComboBox_Ports</class>
+   <extends>QComboBox</extends>
+   <header>combobox_ports</header>
   </customwidget>
  </customwidgets>
  <resources/>
