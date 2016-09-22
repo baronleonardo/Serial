@@ -20,7 +20,8 @@ class Serial(QSerialPort):
         if line != "":
             print(line)
 
-    def get_available_ports_systemLocations_and_manufacturers(self):
+    @staticmethod
+    def get_available_ports_systemLocations_and_manufacturers():
         available_ports = QSerialPortInfo.availablePorts()
         ports_info = []
 
