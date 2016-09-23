@@ -24,6 +24,10 @@ class Serial(QSerialPort):
         if line != "":
             self.readyRead['QByteArray'].emit(line)
 
+    def write(self, data:bytes):
+        super(Serial, self).write(data)
+        self.flush()
+
     @staticmethod
     def get_available_ports_systemLocations_and_manufacturers():
         available_ports = QSerialPortInfo.availablePorts()
