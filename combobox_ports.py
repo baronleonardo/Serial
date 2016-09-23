@@ -20,3 +20,12 @@ class ComboBox_Ports(QComboBox):
 			print(self.currentIndex())
 
 		return
+
+
+	def showPopup(self):
+		self.clear()
+		self.updateList()
+
+
+
+		super(ComboBox_Ports, self).showPopup()
