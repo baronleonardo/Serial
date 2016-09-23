@@ -25,6 +25,13 @@ class Serial(QSerialPort):
         # if line != "":
         self.readyRead[str].emit(line)
 
+    def read(self) -> chr:
+        while self.waitForReadyRead(0) is False :
+            pass
+
+        character = super(Serial, self).read(1)
+        print(character)
+
     def write(self, data:bytes):
         super(Serial, self).write(data)
         self.flush()
