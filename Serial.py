@@ -14,7 +14,7 @@ class Serial(QSerialPort):
         self.parity      = self.NoParity
         self.stopBits    = self.OneStop
         self.flowControl = self.NoFlowControl
-        self.portName    = port_loc
+        self.setPortName(port_loc)
 
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.format_data)
@@ -40,7 +40,7 @@ class Serial(QSerialPort):
         return ports_info
 
     def open(self):
-        if super(Serial, self).open(QIODevice.ReadWrite) == True:
+        if super(Serial, self).open(QIODevice.ReadWrite) is True:
             return True
 
         else:
