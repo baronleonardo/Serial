@@ -8,12 +8,12 @@ class Serial(QSerialPort):
 
     def __init__(self, port_loc="/dev/ttyACM0", baud_rate=9600, parent=None):
         super(Serial, self).__init__(parent)
-        self.parent      = parent
-        self.baudRate    = baud_rate
-        self.dataBits    = self.Data8
-        self.parity      = self.NoParity
-        self.stopBits    = self.OneStop
-        self.flowControl = self.NoFlowControl
+        self.parent = parent
+        self.setBaudRate(baud_rate)
+        self.setDataBits(self.Data8)
+        self.setParity(self.NoParity)
+        self.setStopBits(self.OneStop)
+        self.setFlowControl(self.NoFlowControl)
         self.setPortName(port_loc)
 
         # signal: ready to read, slot: format data
