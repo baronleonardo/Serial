@@ -4,7 +4,7 @@ from PyQt5.QtCore import QIODevice, pyqtSignal
 class Serial(QSerialPort):
 
     # Signal
-    readyRead = pyqtSignal([str])
+    readyRead = pyqtSignal([bytes])
 
     def __init__(self, port_loc="/dev/ttyACM0", baud_rate=9600, parent=None):
         super(Serial, self).__init__(parent)
@@ -17,20 +17,18 @@ class Serial(QSerialPort):
         self.setPortName(port_loc)
 
         # signal: ready to read, slot: format data
-        super(Serial, self).readyRead.connect(self.format_data)
+        super(Serial, self).readyRead.connect(self.__format_data)
 
-    def format_data(self):
-        line = self.readLine().data().decode()
+    def __format_data(self):
+        character = super(Serial, self).read(1)
+        self.readyRead[bytes].emit(character)
 
-        # if line != "":
-        self.readyRead[str].emit(line)
-
-    def read(self) -> chr:
+    def read(self) -> bytes:
         while self.waitForReadyRead(0) is False :
             pass
 
-        character = super(Serial, self).read(1)
-        print(character)
+        byte = super(Serial, self).read(1)
+        return byte
 
     def write(self, data:bytes):
         super(Serial, self).write(data)
