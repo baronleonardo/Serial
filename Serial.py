@@ -6,14 +6,15 @@ class Serial(QSerialPort):
     # Signal
     readyRead = pyqtSignal(['QByteArray'])
 
-    def __init__(self, parent=None):
+    def __init__(self, port_loc="/dev/ttyACM0", baud_rate=9600, parent=None):
         super(Serial, self).__init__(parent)
         self.parent      = parent
-        self.baudRate    = self.Baud9600
+        self.baudRate    = baud_rate
         self.dataBits    = self.Data8
         self.parity      = self.NoParity
         self.stopBits    = self.OneStop
         self.flowControl = self.NoFlowControl
+        self.portName    = port_loc
 
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.format_data)
@@ -38,13 +39,10 @@ class Serial(QSerialPort):
 
         return ports_info
 
-    def open( self, port_loc="/dev/ttyACM0", baud_rate=9600):
-        self.baudRate = baud_rate
-        self.setPortName(port_loc)
-
+    def open(self):
         if super(Serial, self).open(QIODevice.ReadWrite) == True:
             return True
 
         else:
-            print("Can't open port %s" % port_loc)
+            print("Can't open port %s" % self.portName)
             return False
