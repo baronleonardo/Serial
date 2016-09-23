@@ -29,6 +29,10 @@ class Serial(QSerialPort):
         super(Serial, self).write(data)
         self.flush()
 
+    def write_line(self, data:str):
+        for character in data:
+            self.write(character.encode("ascii"))
+
     @staticmethod
     def get_available_ports_systemLocations_and_manufacturers():
         available_ports = QSerialPortInfo.availablePorts()
