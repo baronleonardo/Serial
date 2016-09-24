@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QMainWindow
 class Ui(QMainWindow):
     def __init__(self):
         super(Ui, self).__init__()
-        uic.loadUi('Serial_Communications.ui', self)
+        uic.loadUi('Serial.ui', self)
         self.__signals()
         self.show()
     
