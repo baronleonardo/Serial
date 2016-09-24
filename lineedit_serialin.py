@@ -9,7 +9,7 @@ class LineEdit_SerialIn(QLineEdit):
 	# create a signal
 	serial_input_sent = pyqtSignal(['QString'])
 
-	def __init__(self, parent):
+	def __init__(self, parent=None):
 		super(LineEdit_SerialIn, self).__init__(parent)
 		self.parent = parent
 		
