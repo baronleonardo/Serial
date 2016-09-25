@@ -51,10 +51,14 @@ class Serial(QSerialPort):
 
         return ports_info
 
+    def on_new_portName(self, port_name:str):
+        self.setPortName(port_name)
+        if self.open() is False:
+            print("Can't open port %s" % self.portName())
+
     def open(self):
         if super(Serial, self).open(QIODevice.ReadWrite) is True:
             return True
 
         else:
-            print("Can't open port %s" % self.portName)
             return False
