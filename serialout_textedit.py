@@ -8,9 +8,9 @@ class SerialOut_TextEdit(QTextEdit):
 
     def on_serial_read(self, text):
         if type(text) is bytes:
-            self.append(text.decode('ascii'))
+            self.insertPlainText(text.decode('ascii'))
         elif type(text) is str:
-            self.append(text)
+            self.insertPlainTextappend(text)
 
     def on_autoscroll_state_changed(self, state):
         pass
