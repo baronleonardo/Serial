@@ -19,6 +19,9 @@ class Serial(QSerialPort):
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.__format_data)
 
+    def setBaudRate_str(self, baud_rate:str):
+        super(Serial, self).setBaudRate(int(baud_rate))
+
     def __format_data(self):
         character = super(Serial, self).read(1)
         self.readyRead[bytes].emit(character)
