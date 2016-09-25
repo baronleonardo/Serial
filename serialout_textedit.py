@@ -8,7 +8,11 @@ class SerialOut_TextEdit(QTextEdit):
 
     def on_serial_read(self, text):
         if type(text) is bytes:
-            self.insertPlainText(text.decode('ascii'))
+            try:
+                self.insertPlainText(text.decode('ascii'))
+            except UnicodeDecodeError:
+                pass
+
         elif type(text) is str:
             self.insertPlainTextappend(text)
 
