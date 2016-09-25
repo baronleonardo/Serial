@@ -19,3 +19,5 @@ class Ui(QMainWindow):
 
         # choose baudrate -> change the baud rate in Serial
         self.baudrate_combobox.currentTextChanged.connect( self.serial.setBaudRate_str )
+        # choose port -> change portName in Serial
+        self.ports_combobox.currentTextChanged.connect( self.serial.setPortName )
