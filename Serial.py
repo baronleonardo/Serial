@@ -51,8 +51,8 @@ class Serial(QSerialPort):
 
         return ports_info
 
-    def on_new_portName(self, port_name:str):
-        self.setPortName(port_name)
+    def on_new_portName(self, port):
+        self.setPortName(port)
         if self.open() is False:
             print("Can't open port %s" % self.portName())
 
