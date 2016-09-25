@@ -20,4 +20,6 @@ class Ui(QMainWindow):
         # choose baudrate -> change the baud rate in Serial
         self.baudrate_combobox.currentTextChanged.connect( self.serial.setBaudRate_str )
         # choose port -> fire slot on_new_portName
-        self.ports_combobox.currentItemChanged.connect( self.serial.on_new_portName )
+        self.ports_combobox.currentItemChanged.connect(self.serial.on_new_portName)
+        # serial have something to read -> append reading to serial_out
+        self.serial.readyRead.connect(self.serial_out.on_serial_read)
