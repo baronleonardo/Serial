@@ -19,9 +19,12 @@ class ComboBox_Ports(QComboBox):
 
 		self.lst = Serial.get_available_ports_systemLocations_and_manufacturers()
 
+		manufacture = 1
+		locations = 0
+
 		for index in range(0, len(self.lst)):
-			self.addItem(self.lst[index][1])
-			self.setItemData(index, self.lst[index][0], Qt.ToolTipRole)
+			self.addItem(self.lst[index][manufacture])
+			self.setItemData(index, self.lst[index][locations], Qt.ToolTipRole)
 
 	def showPopup(self):
 		self.clear()
