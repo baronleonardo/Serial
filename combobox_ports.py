@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtCore import Qt
-
+from Serial import Serial
 
 class ComboBox_Ports(QComboBox):
 	"""docstring for ComboBox_Ports"""
@@ -10,8 +10,8 @@ class ComboBox_Ports(QComboBox):
 		self.parent = parent
 
 	def updateList(self):
-		# TODO: call function to get the "port info" list
-		lst = []
+
+		lst = Serial.get_available_ports_systemLocations_and_manufacturers()
 
 		for index in range(0, len(lst)):
 			self.addItem(lst[index][1])
