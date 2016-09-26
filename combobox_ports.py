@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtCore import Qt
 from Serial import Serial
+from PyQt5.QtWidgets import QMessageBox
 
 
 class ComboBox_Ports(QComboBox):
@@ -23,5 +24,8 @@ class ComboBox_Ports(QComboBox):
 	def showPopup(self):
 		self.clear()
 		self.updateList()
+
+		if self.lst == []:
+			QMessageBox.warning(self.parent, "Warning", "No device attached", QMessageBox.Ok, QMessageBox.NoButton)
 
 		super(ComboBox_Ports, self).showPopup()
