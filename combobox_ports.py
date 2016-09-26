@@ -8,10 +8,12 @@ class ComboBox_Ports(QComboBox):
 	"""docstring for ComboBox_Ports"""
 
 	lst = []
+	last = -1
 
 	def __init__(self, parent=None):
 		super(ComboBox_Ports, self).__init__(parent)
 		self.parent = parent
+		self.activated.connect(self.onCurrentIndexChanged)
 
 	def updateList(self):
 
@@ -29,3 +31,8 @@ class ComboBox_Ports(QComboBox):
 			QMessageBox.warning(self.parent, "Warning", "No device attached", QMessageBox.Ok, QMessageBox.NoButton)
 
 		super(ComboBox_Ports, self).showPopup()
+
+	def onCurrentIndexChanged(self, index):
+
+		if self.last != index:
+			self.last = index
