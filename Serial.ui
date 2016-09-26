@@ -204,11 +204,23 @@
       </widget>
       <widget class="QWidget" name="page_2">
        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
         <property name="bottomMargin">
          <number>0</number>
         </property>
         <item>
-         <widget class="ChartView" name="chartview" native="true"/>
+         <widget class="ChartView" name="graphicsView"/>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -398,12 +410,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ChartView</class>
-   <extends>QWidget</extends>
-   <header>chartview</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ComboBox_BaudRate</class>
    <extends>QComboBox</extends>
    <header>combobox_baudrate</header>
@@ -437,6 +443,11 @@
    <class>ComboBox_Ports</class>
    <extends>QComboBox</extends>
    <header>combobox_ports</header>
+  </customwidget>
+  <customwidget>
+   <class>ChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>chartview</header>
   </customwidget>
  </customwidgets>
  <resources/>
