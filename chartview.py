@@ -1,10 +1,18 @@
 from PyQt5.QtChart import QChartView, QChart, QLineSeries
+from PyQt5.QtGui import QPen, QPainter
+from PyQt5.QtCore import Qt
 
 class ChartView(QChartView):
     """docstring for ChartView"""
     def __init__(self, parent=None):
         super(ChartView, self).__init__(parent)
         self.parent = parent
+        self.chart = Chart()
+        self.setChart(self.chart)
+        self.setRenderHint(QPainter.Antialiasing)
+
+    def draw_point(self, x, y):
+        self.chart.add_point(x , y)
         
 class Chart(QChart):
     def __init__(self, parent=None):
