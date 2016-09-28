@@ -20,7 +20,7 @@ class Serial(QSerialPort):
         super(Serial, self).readyRead.connect(self.__format_data)
 
     def __format_data(self):
-        character = super(Serial, self).read(1)
+        character = super(Serial, self).readLine().data()
         self.readyRead[bytes].emit(character)
 
     def read(self) -> bytes:
