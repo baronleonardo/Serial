@@ -2,40 +2,43 @@ from PyQt5.QtWidgets import QComboBox
 from PyQt5.QtCore import Qt
 from Serial import Serial
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtCore import pyqtSignal
 
 
 class ComboBox_Ports(QComboBox):
-	"""docstring for ComboBox_Ports"""
+    """docstring for ComboBox_Ports"""
 
-	lst = []
-	last = -1
+    current_item_changed = pyqtSignal(str)
 
-	def __init__(self, parent=None):
-		super(ComboBox_Ports, self).__init__(parent)
-		self.parent = parent
-		self.activated.connect(self.onCurrentIndexChanged)
+    lst = []
+    last = -1
+    manufacture = 1
+    locations = 0
 
-	def updateList(self):
+    def __init__(self, parent=None):
+        super(ComboBox_Ports, self).__init__(parent)
+        self.parent = parent
+        self.activated.connect(self.onCurrentIndexChanged)
 
-		self.lst = Serial.get_available_ports_systemLocations_and_manufacturers()
+    def updateList(self):
+        self.lst = Serial.get_available_ports_systemLocations_and_manufacturers()
 
-		manufacture = 1
-		locations = 0
+        for index in range(0, len(self.lst)):
+            self.addItem(self.lst[index][self.manufacture])
+            self.setItemData(index, self.lst[index][self.locations], Qt.ToolTipRole)
 
-		for index in range(0, len(self.lst)):
-			self.addItem(self.lst[index][manufacture])
-			self.setItemData(index, self.lst[index][locations], Qt.ToolTipRole)
+    def showPopup(self):
+        self.clear()
+        self.updateList()
 
-	def showPopup(self):
-		self.clear()
-		self.updateList()
+        if self.lst == []:
+            QMessageBox.warning(self.parent, "Warning", "No device attached", QMessageBox.Ok, QMessageBox.NoButton)
 
-		if self.lst == []:
-			QMessageBox.warning(self.parent, "Warning", "No device attached", QMessageBox.Ok, QMessageBox.NoButton)
+        super(ComboBox_Ports, self).showPopup()
 
-		super(ComboBox_Ports, self).showPopup()
+    def onCurrentIndexChanged(self, index):
 
-	def onCurrentIndexChanged(self, index):
-
-		if self.last != index:
-			self.last = index
+        if self.last != index:
+            loc = self.lst[index][self.manufacture]
+            self.current_item_changed.emit(loc)
+            self.last = index
