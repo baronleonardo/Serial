@@ -15,6 +15,7 @@ class Serial(QSerialPort):
         self.setStopBits(self.OneStop)
         self.setFlowControl(self.NoFlowControl)
         self.setPortName(port_loc)
+        self.setReadBufferSize(1)
 
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.__format_data)
