@@ -225,6 +225,22 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
+           <widget class="PauseGraphButton" name="pause_chart_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>pause</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -448,6 +464,17 @@
    <class>ChartView</class>
    <extends>QGraphicsView</extends>
    <header>chartview</header>
+   <slots>
+    <slot>on_pause_chart(bool)</slot>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>PauseGraphButton</class>
+   <extends>QPushButton</extends>
+   <header>pushbutton_pause_graph</header>
+   <slots>
+    <slot>on_toggle(bool)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -591,8 +618,8 @@
      <y>220</y>
     </hint>
     <hint type="destinationlabel">
-     <x>751</x>
-     <y>174</y>
+     <x>794</x>
+     <y>230</y>
     </hint>
    </hints>
   </connection>
@@ -603,12 +630,44 @@
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>773</x>
-     <y>180</y>
+     <x>794</x>
+     <y>230</y>
     </hint>
     <hint type="destinationlabel">
      <x>751</x>
      <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pause_chart_btn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>graphicsView</receiver>
+   <slot>on_pause_chart(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
+     <y>177</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pause_chart_btn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>pause_chart_btn</receiver>
+   <slot>on_toggle(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>213</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>224</y>
     </hint>
    </hints>
   </connection>
