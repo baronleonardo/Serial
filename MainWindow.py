@@ -14,3 +14,5 @@ class Ui(QMainWindow):
     def __signals(self):
         self.page_forward_btn.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page_2))
         self.page_backward_btn.clicked.connect(lambda: self.stackedWidget.setCurrentWidget(self.page))
+        # there is data to be read -> draw it
+        self.serial.readyRead[int].connect(self.graphicsView.draw_point)
