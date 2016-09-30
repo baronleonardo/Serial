@@ -6,6 +6,7 @@ class ChartView(QChartView):
     """docstring for ChartView"""
 
     x = 0
+    is_chart_drawing = True
 
     def __init__(self, parent=None):
         super(ChartView, self).__init__(parent)
@@ -15,13 +16,22 @@ class ChartView(QChartView):
         self.setRenderHint(QPainter.Antialiasing)
 
     def draw_point(self, y):
-        self.chart.add_point(self.x, y)
-        self.x += 1
+        if self.is_chart_drawing is True:
+            self.chart.add_point(self.x, y)
+            self.x += 1
 
-        # scroll and remove old points to keep always seen points = MAX_X
-        if self.x >= self.chart.MAX_X:
-            self.chart.scroll(self.chart.plotArea().width() / self.chart.MAX_X, 0)
-            self.chart.remove_point(0)
+            # scroll and remove old points to keep always seen points = MAX_X
+            if self.x >= self.chart.MAX_X:
+                self.chart.scroll(self.chart.plotArea().width() / self.chart.MAX_X, 0)
+                self.chart.remove_point(0)
+
+    def on_pause_chart(self, state:bool):
+        if state is True:
+            self.is_chart_drawing = False
+
+        else:
+            self.is_chart_drawing = True
+
 
 class Chart(QChart):
     MIN_X = 0
