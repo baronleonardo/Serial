@@ -12,8 +12,8 @@ class ComboBox_Ports(QComboBox):
 
     lst = []
     last = -1
-    manufacture = 1
-    locations = 0
+    MANUFACTURER = 1
+    LOCATION = 0
 
     def __init__(self, parent=None):
         super(ComboBox_Ports, self).__init__(parent)
@@ -24,8 +24,8 @@ class ComboBox_Ports(QComboBox):
         self.lst = Serial.get_available_ports_systemLocations_and_manufacturers()
 
         for index in range(0, len(self.lst)):
-            self.addItem(self.lst[index][self.manufacture])
-            self.setItemData(index, self.lst[index][self.locations], Qt.ToolTipRole)
+            self.addItem(self.lst[index][self.MANUFACTURER])
+            self.setItemData(index, self.lst[index][self.LOCATION], Qt.ToolTipRole)
 
     def showPopup(self):
         self.clear()
@@ -39,6 +39,6 @@ class ComboBox_Ports(QComboBox):
     def onCurrentIndexChanged(self, index):
 
         if self.last != index:
-            loc = self.lst[index][self.manufacture]
+            loc = self.lst[index][self.LOCATION]
             self.currentItemChanged.emit(loc)
             self.last = index
