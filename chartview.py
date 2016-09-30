@@ -4,6 +4,9 @@ from PyQt5.QtCore import Qt
 
 class ChartView(QChartView):
     """docstring for ChartView"""
+
+    x = 0
+
     def __init__(self, parent=None):
         super(ChartView, self).__init__(parent)
         self.parent = parent
@@ -11,9 +14,15 @@ class ChartView(QChartView):
         self.setChart(self.chart)
         self.setRenderHint(QPainter.Antialiasing)
 
-    def draw_point(self, x, y):
-        self.chart.add_point(x , y)
-        
+    def draw_point(self, y):
+        self.chart.add_point(self.x, y)
+        self.x += 1
+
+        # scroll and remove old points to keep always seen points = MAX_X
+        if self.x >= self.chart.MAX_X:
+            self.chart.scroll(self.chart.plotArea().width() / self.chart.MAX_X, 0)
+            self.chart.remove_point(0)
+
 class Chart(QChart):
     MIN_X = 0
     MAX_X = 750
