@@ -20,6 +20,9 @@ class Serial(QSerialPort):
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.__format_data)
 
+    def setBaudRate_str(self, baud_rate:str):
+        super(Serial, self).setBaudRate(int(baud_rate))
+
     def __format_data(self):
         character = super(Serial, self).readLine().data()
         self.readyRead[bytes].emit(character)
@@ -49,10 +52,18 @@ class Serial(QSerialPort):
 
         return ports_info
 
+    def on_new_portName(self, port):
+        if self.isOpen() is True:
+            self.close()
+
+        self.setPortName(port)
+
+        if self.open() is False:
+            print("Can't open port %s" % self.portName())
+
     def open(self):
         if super(Serial, self).open(QIODevice.ReadWrite) is True:
             return True
 
         else:
-            print("Can't open port %s" % self.portName)
             return False
