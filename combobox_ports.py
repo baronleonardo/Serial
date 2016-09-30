@@ -8,7 +8,7 @@ from PyQt5.QtCore import pyqtSignal
 class ComboBox_Ports(QComboBox):
     """docstring for ComboBox_Ports"""
 
-    current_item_changed = pyqtSignal(str)
+    currentItemChanged = pyqtSignal(str)
 
     lst = []
     last = -1
@@ -40,5 +40,5 @@ class ComboBox_Ports(QComboBox):
 
         if self.last != index:
             loc = self.lst[index][self.manufacture]
-            self.current_item_changed.emit(loc)
+            self.currentItemChanged.emit(loc)
             self.last = index
