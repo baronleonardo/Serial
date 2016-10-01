@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 from Serial import Serial
 from PyQt5.QtWidgets import QMessageBox
 from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtSerialPort import QSerialPort
 
 
 class ComboBox_Ports(QComboBox):
@@ -35,6 +36,10 @@ class ComboBox_Ports(QComboBox):
             QMessageBox.warning(self.parent, "Warning", "No device attached", QMessageBox.Ok, QMessageBox.NoButton)
 
         super(ComboBox_Ports, self).showPopup()
+
+    def reset(self):
+        self.clear()
+        self.last = -1
 
     def onCurrentIndexChanged(self, index):
 

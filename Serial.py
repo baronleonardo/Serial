@@ -3,8 +3,9 @@ from PyQt5.QtCore import QIODevice, pyqtSignal
 
 class Serial(QSerialPort):
 
-    # Signal
+    # Signals
     readyRead = pyqtSignal([str], [int])
+    resourcesUnavailable = pyqtSignal()
 
     def __init__(self, port_loc="/dev/ttyACM0", baud_rate=9600, parent=None):
         super(Serial, self).__init__(parent)
@@ -19,6 +20,7 @@ class Serial(QSerialPort):
 
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.__format_data)
+        self.error.connect(self.onError)
 
     def setBaudRate_str(self, baud_rate:str):
         super(Serial, self).setBaudRate(int(baud_rate))
@@ -55,6 +57,10 @@ class Serial(QSerialPort):
             ports_info.append( (port.systemLocation(), port.manufacturer()) )
 
         return ports_info
+
+    def onError(self, error):
+        if error == QSerialPort.ResourceError:
+            self.resourcesUnavailable.emit()
 
     def on_new_portName(self, port):
         if self.isOpen() is True:

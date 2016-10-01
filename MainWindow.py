@@ -23,3 +23,5 @@ class Ui(QMainWindow):
         self.ports_combobox.currentItemChanged.connect(self.serial.on_new_portName)
         # serial have something to read -> append reading to serial_out
         self.serial.readyRead.connect(self.serial_out.on_serial_read)
+        # resource becomes unavailable -> reset ports_combobox
+        self.serial.resourcesUnavailable.connect(self.ports_combobox.reset)
