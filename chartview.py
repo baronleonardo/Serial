@@ -1,12 +1,15 @@
 from PyQt5.QtChart import QChartView, QChart, QLineSeries
 from PyQt5.QtGui import QPen, QPainter
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QEvent
 
 class ChartView(QChartView):
     """docstring for ChartView"""
 
     x = 0
     is_chart_drawing = True
+    max_y = 0
+    min_y = 0
+    counter = 0
 
     def __init__(self, parent=None):
         super(ChartView, self).__init__(parent)
@@ -25,6 +28,24 @@ class ChartView(QChartView):
                 self.chart.scroll(self.chart.plotArea().width() / self.chart.MAX_X, 0)
                 self.chart.remove_point(0)
 
+            self.__calculate_peak(y)
+
+    def __calculate_peak(self, y):
+        if self.counter == self.chart.MAX_X:
+            self.max_y   = 0
+            self.min_y   = 0
+            self.counter = 0
+
+        if self.max_y < y:
+            self.max_y = y
+            self.chart.axisY().setMax(y + (0.1 * y))
+
+        elif self.min_y > y:
+            self.min_y = y
+            self.chart.axisY().setMin(y + 1)
+
+        self.counter += 1
+
     def on_pause_chart(self, state:bool):
         if state is True:
             self.is_chart_drawing = False
@@ -36,9 +57,9 @@ class ChartView(QChartView):
 class Chart(QChart):
     MIN_X = 0
     MAX_X = 750
-    MIN_Y = -10
-    MAX_Y = 10
-    TICKS = 3
+    MIN_Y = -1
+    MAX_Y = 1
+    TICKS = 5
     PENCOLOR = Qt.red
     PENWIDTH = 1
 
