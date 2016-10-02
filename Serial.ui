@@ -33,7 +33,7 @@
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -205,16 +205,16 @@
       <widget class="QWidget" name="page_2">
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <property name="spacing">
-         <number>0</number>
+         <number>6</number>
         </property>
         <property name="leftMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>9</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -224,22 +224,6 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="PauseGraphButton" name="pause_chart_btn">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>pause</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item>
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
@@ -252,6 +236,28 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="PauseGraphButton" name="pause_chart_btn">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding-left: 20 px;
+padding-right: 20 px;
+padding-top: 2.5 px;
+padding-bottom: 2.5 px;</string>
+            </property>
+            <property name="text">
+             <string>pause</string>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="ComboBox_BaudRate" name="baudrate_combobox_2">
@@ -618,8 +624,8 @@
      <y>220</y>
     </hint>
     <hint type="destinationlabel">
-     <x>794</x>
-     <y>230</y>
+     <x>785</x>
+     <y>232</y>
     </hint>
    </hints>
   </connection>
@@ -630,8 +636,8 @@
    <slot>setCurrentIndex(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>794</x>
-     <y>230</y>
+     <x>785</x>
+     <y>232</y>
     </hint>
     <hint type="destinationlabel">
      <x>751</x>
@@ -646,8 +652,8 @@
    <slot>on_pause_chart(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>223</y>
+     <x>699</x>
+     <y>226</y>
     </hint>
     <hint type="destinationlabel">
      <x>367</x>
@@ -662,12 +668,12 @@
    <slot>on_toggle(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>67</x>
-     <y>213</y>
+     <x>689</x>
+     <y>216</y>
     </hint>
     <hint type="destinationlabel">
-     <x>35</x>
-     <y>224</y>
+     <x>657</x>
+     <y>227</y>
     </hint>
    </hints>
   </connection>
