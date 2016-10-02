@@ -1,5 +1,6 @@
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtCore import QIODevice, pyqtSignal
+import os
 
 class Serial(QSerialPort):
 
@@ -25,11 +26,17 @@ class Serial(QSerialPort):
     def setBaudRate_str(self, baud_rate:str):
         super(Serial, self).setBaudRate(int(baud_rate))
 
+    line = ""
+
     def __format_data(self):
         try:
             data = self.readAll().data().decode('ascii')
             self.readyRead[str].emit(data)
-            self.readyRead[int].emit(int(data))
+            
+            self.line += data
+            if data == os.linesep:
+                self.readyRead[int].emit(int(self.line.rstrip()))
+                self.line = ""
         except ValueError:
             pass
 
