@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QTextEdit
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QTextCursor
 import platform
 
 class SerialOut_TextEdit(QTextEdit):
@@ -8,20 +9,28 @@ class SerialOut_TextEdit(QTextEdit):
         super(SerialOut_TextEdit, self).__init__(parent)
         self.parent = parent
 
-        self.__v_scrollbar = self.verticalScrollBar()
-        self.cursorPositionChanged.connect(self.onCursorPositionChanged)
         self.OS_TYPE = platform.system()
+        self.is_auto_scrolling = True
 
     def on_serial_read(self, text):
-        self.append(text)
         if text != '\r' or self.OS_TYPE == 'Windows':
+            prev_cursor_pos = self.textCursor()
+            prev_scrollbar_pos = self.verticalScrollBar().value()
 
-    def onCursorPositionChanged(self):
-        self.__v_scrollbar.setSliderPosition(self.__v_scrollbar.maximum())
+            self.moveCursor(QTextCursor.End)
+            self.insertPlainText(text)
+
+            if self.is_auto_scrolling is False:
+                self.setTextCursor(prev_cursor_pos)
+                self.verticalScrollBar().setValue(prev_scrollbar_pos)
+
+            elif self.is_auto_scrolling is True:
+                self.moveCursor(QTextCursor.End)
+                self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
     def on_autoscroll_state_changed(self, state):
         if state == Qt.Checked:
-            self.cursorPositionChanged.connect(self.onCursorPositionChanged)
+            self.is_auto_scrolling = True
 
         elif state == Qt.Unchecked:
-            self.cursorPositionChanged.disconnect(self.onCursorPositionChanged)
+            self.is_auto_scrolling = False
