@@ -32,12 +32,14 @@ class Serial(QSerialPort):
         try:
             data = self.readAll().data().decode('ascii')
             self.readyRead[str].emit(data)
-            
+
             self.line += data
             if data == os.linesep:
-                self.readyRead[int].emit(int(self.line.rstrip()))
+                self.line = self.line.rstrip()
+                if self.line != "":
+                    self.readyRead[int].emit(int(self.line))
                 self.line = ""
-        except ValueError:
+        except (ValueError, UnicodeDecodeError):
             pass
 
     def read(self) -> bytes:
