@@ -1,5 +1,6 @@
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtCore import QIODevice, pyqtSignal, QTextStream
+from PyQt5.QtWidgets import QMessageBox
 
 class Serial(QSerialPort):
 
@@ -66,6 +67,10 @@ class Serial(QSerialPort):
     def onError(self, error):
         if error == QSerialPort.ResourceError:
             self.resourcesUnavailable.emit()
+
+        elif error == QSerialPort.PermissionError:
+            QMessageBox.warning(self.parent, \
+             "Warning", "Can not open %s\nIt may be already opened" % self.portName())
 
     def on_new_portName(self, port):
         if self.isOpen() is True:
