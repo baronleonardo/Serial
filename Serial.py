@@ -28,11 +28,12 @@ class Serial(QSerialPort):
 
     def __format_data(self):
         try:
-            data = self.readLine().data().decode('ascii').strip()
+            data = self.readLine().data().decode('ascii')
 
-            if data != "":
+            # sometimes empty of just \n read by `readLine`
+            if data != "" and data != "\n":
                 self.readyRead[str].emit(data)
-                self.readyRead[int].emit(int(data))
+                self.readyRead[int].emit(int(data.strip()))
 
         except (ValueError):
             pass
