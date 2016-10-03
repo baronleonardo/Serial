@@ -1,12 +1,13 @@
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtCore import QIODevice, pyqtSignal
-import os
 
 class Serial(QSerialPort):
 
     # Signals
     readyRead = pyqtSignal([str], [int])
     resourcesUnavailable = pyqtSignal()
+
+    line_read = ""
 
     def __init__(self, port_loc="/dev/ttyACM0", baud_rate=9600, parent=None):
         super(Serial, self).__init__(parent)
@@ -26,19 +27,17 @@ class Serial(QSerialPort):
     def setBaudRate_str(self, baud_rate:str):
         super(Serial, self).setBaudRate(int(baud_rate))
 
-    line = ""
-
     def __format_data(self):
         try:
             data = self.readAll().data().decode('ascii')
             self.readyRead[str].emit(data)
 
-            self.line += data
-            if data == os.linesep:
-                self.line = self.line.rstrip()
-                if self.line != "":
-                    self.readyRead[int].emit(int(self.line))
-                self.line = ""
+            self.line_read += data
+            self.line_read.strip()
+            if data == "\r" or data == "\n":
+                self.line_read = self.line_read.rstrip()
+                self.readyRead[int].emit(int(self.line_read))
+                self.line_read = ""
         except (ValueError, UnicodeDecodeError):
             pass
 
@@ -53,7 +52,7 @@ class Serial(QSerialPort):
         super(Serial, self).write(data)
         self.flush()
 
-    def write_line(self, data:str):
+    def write_line_read(self, data:str):
         for character in data:
             self.write(character.encode("ascii"))
 
