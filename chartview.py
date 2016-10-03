@@ -9,7 +9,8 @@ class ChartView(QChartView):
     is_chart_drawing = True
     max_y = 0
     min_y = 0
-    counter = 0
+    counter_X = 0
+    counter_Y = 0
 
     def __init__(self, parent=None):
         super(ChartView, self).__init__(parent)
@@ -31,20 +32,28 @@ class ChartView(QChartView):
             self.__calculate_peak(y)
 
     def __calculate_peak(self, y):
-        if self.counter == self.chart.MAX_X:
-            self.max_y   = 0
-            self.min_y   = 0
-            self.counter = 0
+        if self.counter_X == self.chart.MAX_X:
+            self.max_y     = 0
+            self.min_y     = 0
+            self.counter_X = 0
+
+        elif self.counter_Y == self.chart.MAX_X:
+            self.max_y     = 0
+            self.min_y     = 0
+            self.counter_Y = 0
 
         if self.max_y < y:
             self.max_y = y
             self.chart.axisY().setMax(y + (0.1 * y))
+            self.counter_X = 0
 
         elif self.min_y > y:
             self.min_y = y
-            self.chart.axisY().setMin(y + 1)
+            self.chart.axisY().setMin(y + (0.1 * y))
+            self.counter_Y = 0
 
-        self.counter += 1
+        self.counter_X += 1
+        self.counter_Y += 1
 
     def on_pause_chart(self, state:bool):
         if state is True:
