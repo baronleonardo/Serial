@@ -1,5 +1,5 @@
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
-from PyQt5.QtCore import QIODevice, pyqtSignal
+from PyQt5.QtCore import QIODevice, pyqtSignal, QTextStream
 
 class Serial(QSerialPort):
 
@@ -18,7 +18,6 @@ class Serial(QSerialPort):
         self.setStopBits(self.OneStop)
         self.setFlowControl(self.NoFlowControl)
         self.setPortName(port_loc)
-        self.setReadBufferSize(1)
 
         # signal: ready to read, slot: format data
         super(Serial, self).readyRead.connect(self.__format_data)
@@ -29,16 +28,13 @@ class Serial(QSerialPort):
 
     def __format_data(self):
         try:
-            data = self.readAll().data().decode('ascii')
-            self.readyRead[str].emit(data)
+            data = self.readLine().data().decode('ascii').strip()
 
-            self.line_read += data
-            self.line_read.strip()
-            if data == "\r" or data == "\n":
-                self.line_read = self.line_read.rstrip()
-                self.readyRead[int].emit(int(self.line_read))
-                self.line_read = ""
-        except (ValueError, UnicodeDecodeError):
+            if data != "":
+                self.readyRead[str].emit(data)
+                self.readyRead[int].emit(int(data))
+
+        except (ValueError):
             pass
 
     def read(self) -> bytes:
