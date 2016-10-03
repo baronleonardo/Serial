@@ -37,3 +37,6 @@ class SerialOut_TextEdit(QTextEdit):
 
         elif state == Qt.Unchecked:
             self.is_auto_scrolling = False
+
+    def reset(self):
+        self.clear()

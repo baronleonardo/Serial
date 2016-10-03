@@ -21,6 +21,10 @@ class Ui(QMainWindow):
         self.baudrate_combobox.currentTextChanged.connect( self.serial.setBaudRate_str )
         # choose port -> fire slot on_new_portName
         self.ports_combobox.currentItemChanged.connect(self.serial.on_new_portName)
+        # choose a new port -> reset Chart
+        self.ports_combobox.currentItemChanged.connect(self.graphicsView.reset)
+        # choose a new port -> clear serial out
+        self.ports_combobox.currentItemChanged.connect(self.serial_out.reset)
         # serial have something to read -> append reading to serial_out
         self.serial.readyRead[str].connect(self.serial_out.on_serial_read)
         # there is data to be read -> draw it

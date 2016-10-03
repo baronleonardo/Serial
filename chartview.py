@@ -53,6 +53,16 @@ class ChartView(QChartView):
         else:
             self.is_chart_drawing = True
 
+    def reset(self):
+        del(self.chart)
+        self.chart = Chart()
+        self.setChart(self.chart)
+
+        self.x         = 0
+        self.max_y     = 0
+        self.min_y     = 0
+        self.counter_X = 0
+        self.counter_Y = 0
 
 class Chart(QChart):
     MIN_X = 0
