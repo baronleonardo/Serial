@@ -51,8 +51,9 @@ class Serial(QSerialPort):
         self.flush()
 
     def write_line_read(self, data:str):
-        for character in data:
-            self.write(character.encode("ascii"))
+        if self.isOpen() is True:
+            for character in data:
+                self.write(character.encode("ascii"))
 
     @staticmethod
     def get_available_ports_systemLocations_and_manufacturers():
