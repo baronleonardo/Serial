@@ -31,3 +31,5 @@ class Ui(QMainWindow):
         self.serial.readyRead[int].connect(self.graphicsView.draw_point)
         # resource becomes unavailable -> reset ports_combobox
         self.serial.resourcesUnavailable.connect(self.ports_combobox.reset)
+        # user write data -> sent it
+        self.serial_input.serial_input_sent.connect(self.serial.write_line_read)
